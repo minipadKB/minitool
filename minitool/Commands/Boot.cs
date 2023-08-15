@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace minitool.Commands;
 
@@ -19,7 +20,15 @@ public static class Boot
 
   public static int Handle(Options options)
   {
-    // Send the boot command by simulating a send command input. ("minitool send ... boot")
-    return Send.Handle(new Send.Options(options.Port, "boot"));
+    // Set the device into bootloader mode by setting the serial baud rate to 1200.
+    Process.Start(new ProcessStartInfo()
+    {
+      FileName = "mode.com",
+      Arguments = $"COM{options.Port}:Baud=1200",
+      CreateNoWindow = true,
+      UseShellExecute = false
+    })?.WaitForExit();
+
+    return 0;
   }
 }
