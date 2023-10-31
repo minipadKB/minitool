@@ -46,7 +46,7 @@ public static class Flash
       Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("Error: The specified firmware file is not a .uf2 file.");
       Console.ForegroundColor = ConsoleColor.Gray;
-      return 7;
+      return 5;
     }
 
     MinipadDevice device;
@@ -117,7 +117,7 @@ public static class Flash
       Console.WriteLine($"Failed to send the command: {ex.Message}");
       Console.WriteLine(ex.StackTrace);
       Console.ForegroundColor = ConsoleColor.Gray;
-      return 5;
+      return 4;
     }
   }
 }
