@@ -33,7 +33,8 @@ public static class Visualize
       // If any error occured, output it to the user.
       Console.ForegroundColor = ConsoleColor.Red;
       Console.Write("Error: ");
-      Console.WriteLine($"{ex.InnerException!.Message}\n{ex.InnerException!.StackTrace}");
+      Console.WriteLine($"{ex.InnerException!.Message}");
+      Console.WriteLine(ex.InnerException!.StackTrace);
       Console.ForegroundColor = ConsoleColor.Gray;
       return 3;
     }

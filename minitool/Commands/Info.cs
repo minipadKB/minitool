@@ -36,7 +36,8 @@ public static class Info
       Console.Write("State: ");
       Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("Error");
-      Console.WriteLine($"{ex.InnerException!.Message}\n{ex.InnerException!.StackTrace}");
+      Console.WriteLine($"{ex.InnerException!.Message}");
+      Console.WriteLine(ex.InnerException!.StackTrace);
       Console.ForegroundColor = ConsoleColor.Gray;
       return 3;
     }
