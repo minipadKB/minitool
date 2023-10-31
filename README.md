@@ -24,7 +24,7 @@ which can be found in our GitHub repository [here](https://github.com/minipadkb/
 
 # Usage
 
-This command-line utility can be used by opening the Windows Terminal or command prompt (*not powershell*) in the folder of the minitool.exe executable. Below you can find a list of commands.</br>
+This command-line utility can be used either via the CMD or PowerShell, or by simply running the `minitool.exe` file. Below you can find a list of commands.</br>
 **Note:** 'port' is always referring to the port number, excluding the `COM` prefix. (e.g. `4` instead of `COM4`)
 
 General syntax: `minitool.exe <sub-command> <parameters...>`
@@ -53,6 +53,14 @@ Command: `visualize <port>`</br>
 Description: Displays a commandline-based visualizer for the Hall Effect keys.</br>
 Example: `minitool.exe visualize 14`</br>
 
-You can also find a list of these commands with `minitool.exe help`.
+Command: `flash <port> <file>`</br>
+Description: Flashes the specified firmware file (.UF2) to the minipad device.</br>
+Example: `minitool.exe flash 11 firmware.uf2`</br>
+
+Command: `console <port>`</br>
+Description: Opens a console for sending commands to the minipad device.</br>
+Example: `minitool.exe console 6`</br>
+
+You can also find a list of these commands by running the `minitool.exe` file.
 
 **A list of commands for the minipad firmware can be found [here](https://github.com/minipadKB/minipad-firmware/tree/master#minipad-serial-protocol-msp-).**
