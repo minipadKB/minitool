@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO.Ports;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using minitool.Enums;
 using minitool.Models;
 
@@ -11,20 +12,29 @@ namespace minitool;
 /// </summary>
 public static class MinipadHelper
 {
+  public static SerialPort Open(string portName)
+  {
+    // Create the SerialPort instance with the correct settings.
+    SerialPort port = new SerialPort(portName, 115200, Parity.Even, 8, StopBits.One);
+    port.RtsEnable = true;
+    port.DtrEnable = true;
+
+    // Open the port and return it.
+    port.Open();
+    return port;
+  }
+
   public static void Send(MinipadDevice device, params string[] commands)
   {
     // Open the serial port.
-    SerialPort serialPort = new SerialPort(device.PortName, 115200, Parity.Even, 8, StopBits.One);
-    serialPort.RtsEnable = true;
-    serialPort.DtrEnable = true;
-    serialPort.Open();
+    SerialPort port = Open(device.PortName);
 
     // Write all specified commands to the serial interface.
     foreach (string command in commands)
-      serialPort.WriteLine(command);
+      port.WriteLine(command);
 
     // Safely close the serial port for usage by other processes.
-    serialPort.Close();
+    port.Close();
   }
 
   public static (int[] raw, int[] mapped) GetSensorValues(MinipadDevice device)
@@ -38,9 +48,7 @@ public static class MinipadHelper
       mappedValues[i] = -1;
     }
 
-    SerialPort port = new SerialPort(device.PortName, 115200, Parity.None, 8, StopBits.One);
-    port.RtsEnable = true;
-    port.DtrEnable = true;
+    SerialPort port = Open(device.PortName);
     port.DataReceived += (sender, e) =>
     {
       lock (port)
@@ -63,8 +71,7 @@ public static class MinipadHelper
       }
     };
 
-    // Open the port, send the out command, wait until no value in the array is -1 anymore and safely close it.
-    port.Open();
+    // Send the out command, wait until no value in the array is -1 anymore and safely close it.
     port.WriteLine("out");
     while (rawValues.Any(x => x == -1))
       ;
@@ -75,15 +82,12 @@ public static class MinipadHelper
     return (rawValues, mappedValues);
   }
 
-  public static async Task<MinipadDevice> GetDeviceAsync(int port)
+  public static async Task<MinipadDevice> GetDeviceAsync(int portNumber)
   {
     try
     {
       // Open the serial port.
-      SerialPort serialPort = new SerialPort($"COM{port}", 115200, Parity.Even, 8, StopBits.One);
-      serialPort.RtsEnable = true;
-      serialPort.DtrEnable = true;
-      serialPort.Open();
+      SerialPort port = Open($"COM{portNumber}");
 
       // Create a semaphore for timeouting the serial data reading.
       SemaphoreSlim semaphoreSlim = new SemaphoreSlim(0);
@@ -93,13 +97,13 @@ public static class MinipadHelper
       void DataReceivedCallback(object sender, SerialDataReceivedEventArgs e)
       {
         // Lock the serial port to make sure it's not being closed when the 200ms timeout runs out.
-        lock (serialPort)
+        lock (port)
         {
           // Read the data all the way to the end, line by line.
-          while (serialPort.BytesToRead > 0)
+          while (port.BytesToRead > 0)
           {
             // Read the next line.
-            string line = serialPort.ReadLine().TrimEnd('\r');
+            string line = port.ReadLine().TrimEnd('\r');
 
             // If the end of the 'get' command was reached (indicated by "GET END"), release the semaphore thus returning.
             if (line == "GET END")
@@ -116,15 +120,15 @@ public static class MinipadHelper
       }
 
       // Subscribe to the callback method, write the 'get' command that returns the keypad specifications.
-      serialPort.DataReceived += DataReceivedCallback;
-      serialPort.WriteLine("get");
+      port.DataReceived += DataReceivedCallback;
+      port.WriteLine("get");
 
       // Give the response 200ms until this reading process times out.
       await semaphoreSlim.WaitAsync(10);
 
       // Safely close the serial port for usage by other processes.
-      lock (serialPort)
-        serialPort.Close();
+      lock (port)
+        port.Close();
 
       // Create a Configuration object from the retrieved values, starting with the global settings.
       Configuration configuration = new Configuration()
@@ -165,17 +169,17 @@ public static class MinipadHelper
         };
 
       // Create a MinipadDevice object with the parsed info and return it.
-      return new MinipadDevice(port, DeviceState.CONNECTED, values.ContainsKey("version") ? values["version"] : null, configuration);
+      return new MinipadDevice(portNumber, DeviceState.CONNECTED, values.ContainsKey("version") ? values["version"] : null, configuration);
     }
     catch (UnauthorizedAccessException)
     {
       // If an UnauthorizedAccessException was thrown, the device is connected but the serial interface occupied by another process.
-      return new MinipadDevice(port, DeviceState.BUSY, null, new Configuration());
+      return new MinipadDevice(portNumber, DeviceState.BUSY, null, new Configuration());
     }
     catch (FileNotFoundException)
     {
       // If a FileNotFoundException was thrown, the device is disconnected.
-      return new MinipadDevice(port, DeviceState.DISCONNECTED, null, new Configuration());
+      return new MinipadDevice(portNumber, DeviceState.DISCONNECTED, null, new Configuration());
     }
   }
 

@@ -31,7 +31,7 @@ namespace minitool
       {
         x.EnableDashDash = true;
         x.HelpWriter = Console.Out;
-      }).ParseArguments<Devices.Options, Info.Options, Boot.Options, Send.Options, Calibrate.Options, Visualize.Options, Flash.Options>(args).MapResult(
+      }).ParseArguments<Devices.Options, Info.Options, Boot.Options, Send.Options, Calibrate.Options, Visualize.Options, Flash.Options, Console_.Options>(args).MapResult(
         (Devices.Options o) => Devices.Handle(o),
         (Info.Options o) => Info.Handle(o),
         (Boot.Options o) => Boot.Handle(o),
@@ -39,6 +39,7 @@ namespace minitool
         (Calibrate.Options o) => Calibrate.Handle(o),
         (Visualize.Options o) => Visualize.Handle(o),
         (Flash.Options o) => Flash.Handle(o),
+        (Console_.Options o) => Console_.Handle(o),
         Error);
     }
 

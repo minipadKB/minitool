@@ -2,7 +2,7 @@
   "profiles": {
     "minitool": {
       "commandName": "Project",
-      "commandLineArgs": "visualize 37"
+      "commandLineArgs": "console 4"
     }
   }
 }
