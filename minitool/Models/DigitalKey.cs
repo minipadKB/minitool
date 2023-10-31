@@ -27,6 +27,8 @@ public class DigitalKey
   /// </summary>
   public override string ToString()
   {
+    // dkey1: char='a' hid=true
+
     return $"dkey{Index.IfNull("?")}: char={KeyChar.IfNull("?", "'{}'")} hid={HidEnabled.IfNull("?").ToLower()}";
   }
 }
