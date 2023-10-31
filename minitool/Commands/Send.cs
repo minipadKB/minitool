@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using minitool.Models;
 using minitool.Enums;
+using Console = System.Console;
 
 namespace minitool.Commands;
 
@@ -19,7 +20,7 @@ public static class Send
     public int Port { get; private set; }
 
     [Value(1, Required = true, HelpText = "The raw command to be sent.")]
-    public string Command { get; private set; }
+    public string Command { get; private set; } = "";
 
     public Options() { }
 
@@ -80,7 +81,7 @@ public static class Send
       Console.WriteLine($"Failed to send the command: {ex.Message}");
       Console.WriteLine(ex.StackTrace);
       Console.ForegroundColor = ConsoleColor.Gray;
-      return 5;
+      return 4;
     }
   }
 }

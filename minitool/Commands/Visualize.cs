@@ -22,7 +22,6 @@ public static class Visualize
 
   public static int Handle(Options options)
   {
-
     MinipadDevice device;
     try
     {
