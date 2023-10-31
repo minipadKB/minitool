@@ -1,8 +1,7 @@
 {
   "profiles": {
     "minitool": {
-      "commandName": "Project",
-      "commandLineArgs": "console 4"
+      "commandName": "Project"
     }
   }
 }

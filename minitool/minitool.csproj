@@ -6,6 +6,7 @@
         <RootNamespace>minitool</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Authors>minisbett</Authors>
     </PropertyGroup>
 
     <ItemGroup>
