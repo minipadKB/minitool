@@ -23,6 +23,10 @@ public static class Calibrate
 
   public static int Handle(Options options)
   {
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Please note that manual calibration is only necessary up to firmware version 2023.813.1.");
+    Console.ReadKey();
+
     MinipadDevice device;
     try
     {
