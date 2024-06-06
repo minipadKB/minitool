@@ -45,10 +45,6 @@ Command: `send <port> "<command>"`</br>
 Description: Sends the specified command to the minipad device.</br>
 Example: `minitool.exe send 9 "hkey.rt 1"`</br>
 
-Command: `calibrate <port>`</br>
-Description: Helps you calibrating the minipad by pressing the keys down.</br>
-Example: `minitool.exe calibrate 3`</br>
-
 Command: `visualize <port>`</br>
 Description: Displays a commandline-based visualizer for the Hall Effect keys.</br>
 Example: `minitool.exe visualize 14`</br>
