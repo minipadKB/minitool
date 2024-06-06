@@ -1,12 +1,6 @@
-﻿using CommandLine.Text;
-using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using minitool.Models;
+﻿using CommandLine;
 using minitool.Enums;
+using minitool.Models;
 using System.Diagnostics;
 
 namespace minitool.Commands;
@@ -99,7 +93,7 @@ public static class Flash
 
       // Waiting for a new drive to appear.
       Console.WriteLine("Waiting for bootloader...");
-      while(Environment.GetLogicalDrives().SequenceEqual(drives))
+      while (Environment.GetLogicalDrives().SequenceEqual(drives))
         Thread.Sleep(100);
 
       // Get the drive letter of the new drive and copy the firmware file on it.

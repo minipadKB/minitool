@@ -1,6 +1,4 @@
-﻿using System.IO.Ports;
-using Microsoft.Win32;
-using minitool.Models;
+﻿using Microsoft.Win32;
 
 namespace minitool;
 
@@ -36,7 +34,7 @@ public static class RegistryHelper
           continue;
 
         // Get the COM port from the "Device Parameters" subkey.
-        string? portName = (string?) deviceParameters.GetValue("PortName");
+        string? portName = (string?)deviceParameters.GetValue("PortName");
         if (portName == null)
           continue;
 

@@ -1,10 +1,4 @@
-﻿using CommandLine.Text;
-using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommandLine;
 using minitool.Enums;
 using minitool.Models;
 using System.IO.Ports;
@@ -18,7 +12,7 @@ public static class Console_
   {
     [Value(0, Required = true, HelpText = "The port number of the minipad.")]
     public int Port { get; private set; }
-    
+
     public Options() { }
   }
 
@@ -63,7 +57,7 @@ public static class Console_
 
     // Ask for user input in a loop and only exit if the user types an exit keyword.
     string input = "";
-    while(true)
+    while (true)
     {
       // Ask for user input.
       Console.Write($"{device.Configuration.Name} ({device.PortName})> ");

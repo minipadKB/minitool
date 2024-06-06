@@ -33,7 +33,7 @@ public class MinipadDevice
   /// The configuration of the keypad.
   /// </summary>
   public Configuration Configuration { get; }
-  
+
   /// <summary>
   /// Initialize a new MinipadDevice instance with the specified COM port, firmware version and configuration.
   /// </summary>

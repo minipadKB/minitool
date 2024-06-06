@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace minitool.Utils;
+﻿namespace minitool.Utils;
 
 /// <summary>
 /// Helper class containing extension methods for various types.

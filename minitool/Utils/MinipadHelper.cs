@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
-using System.IO.Ports;
-using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using minitool.Enums;
+﻿using minitool.Enums;
 using minitool.Models;
+using System.IO.Ports;
 
 namespace minitool;
 
@@ -198,16 +195,16 @@ public static class MinipadHelper
 
     // Parse the string value properly depending on the specified generic type.
     if (typeof(T) == typeof(bool))
-      return (T) (object) (dict[key] == "1");
+      return (T)(object)(dict[key] == "1");
     else if (typeof(T) == typeof(char))
     {
       bool successful = int.TryParse(dict[key], out int result) && result <= char.MaxValue;
-      return successful ? (T) (object) (char) result : null;
+      return successful ? (T)(object)(char)result : null;
     }
     else if (typeof(T) == typeof(int))
     {
       bool successful = int.TryParse(dict[key], out int result);
-      return successful ? (T) (object) result : null;
+      return successful ? (T)(object)result : null;
     }
 
     // If no type matched, return null.

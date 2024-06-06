@@ -1,12 +1,7 @@
 ﻿using CommandLine;
-using CommandLine.Text;
 using minitool.Commands;
-using minitool.Models;
-using minitool.Utils;
-using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace minitool
 {
@@ -27,7 +22,7 @@ namespace minitool
       // If the application was ran by executing the exe file from the desktop environment, rather than the commandline,
       // open a new commandline window and run the application from there. This helps users that are not that familiar with CLI.
       // This check can be done by looking whether no args are specified and the cursor is all the way at the top.
-      if(args.Length == 0 && Console.CursorTop == 0)
+      if (args.Length == 0 && Console.CursorTop == 0)
       {
         // Run a CMD session and initially print the help text to guide the user on how to start.
         Process.Start(new ProcessStartInfo("cmd.exe", "/k minitool help")

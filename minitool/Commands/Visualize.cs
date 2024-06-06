@@ -1,14 +1,6 @@
-﻿using CommandLine.Text;
-using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommandLine;
 using minitool.Enums;
 using minitool.Models;
-using System.IO.Ports;
-using System.Diagnostics;
 
 namespace minitool.Commands;
 public static class Visualize
@@ -79,7 +71,7 @@ public static class Visualize
 
         // Calculate the total width available for the visualizer bar, based on the console width, prefix and suffix.
         int totalWidth = Console.WindowWidth - prefix.Length - suffix.Length - 3;
-        int width = (int) Math.Ceiling(mappedValues[i] / (device.Configuration.TravelDistance.Value * 1d / totalWidth));
+        int width = (int)Math.Ceiling(mappedValues[i] / (device.Configuration.TravelDistance.Value * 1d / totalWidth));
 
         // Print the line, including prefix, visualizer bar and suffix.
         Console.Write(prefix);

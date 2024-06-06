@@ -1,12 +1,6 @@
-﻿using CommandLine.Text;
-using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using minitool.Models;
+﻿using CommandLine;
 using minitool.Enums;
+using minitool.Models;
 
 namespace minitool.Commands;
 
@@ -40,7 +34,7 @@ public static class Devices
         devices.Add(port, null);
       }
     }
-     
+
     // Output all connected devices, including their name, COM port and state.
     Console.WriteLine($"List of connected minipads ({devices.Where(x => x.Value?.State == DeviceState.CONNECTED).Count()} connected, " +
                                                   $"{devices.Where(x => x.Value?.State == DeviceState.BUSY).Count()} busy):");

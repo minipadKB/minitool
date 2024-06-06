@@ -1,12 +1,6 @@
-﻿using CommandLine.Text;
-using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using minitool.Models;
+﻿using CommandLine;
 using minitool.Enums;
+using minitool.Models;
 using Console = System.Console;
 
 namespace minitool.Commands;
