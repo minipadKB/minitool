@@ -29,6 +29,6 @@ public class DigitalKey
   {
     // dkey1: char='a' hid=true
 
-    return $"dkey{Index.IfNull("?")}: char={KeyChar.IfNull("?", "'{}'")} hid={HidEnabled.IfNull("?").ToLower()}";
+    return $"dkey{(Index + 1).IfNull("?")}: char={KeyChar.IfNull("?", "'{}'")} hid={HidEnabled.IfNull("?").ToLower()}";
   }
 }

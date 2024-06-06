@@ -53,7 +53,7 @@ public class HallEffectKey : DigitalKey
   {
     // hkey1: rt=true crt=true rtus=20 rtds=60 lh=280 uh=330 rest=1800 down=1100 char='a' hid=true
 
-    return $"hkey{Index.IfNull("?")}: rt={RapidTrigger.IfNull("?").ToLower()} crt={ContinuousRapidTrigger.IfNull("?").ToLower()} " +
+    return $"hkey{(Index + 1).IfNull("?")}: rt={RapidTrigger.IfNull("?").ToLower()} crt={ContinuousRapidTrigger.IfNull("?").ToLower()} " +
            $"rtus={RapidTriggerUpSensitivity.IfNull("?")} rtds={RapidTriggerDownSensitivity.IfNull("?")} lh={LowerHysteresis.IfNull("?")} " +
            $"uh={UpperHysteresis.IfNull("?")} rest={RestPosition.IfNull("?")} down={DownPosition.IfNull("?")}{base.ToString().Split(':')[1]}";
   }
