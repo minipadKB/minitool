@@ -29,7 +29,6 @@ namespace minitool
       // This check can be done by looking whether no args are specified and the cursor is all the way at the top.
       if(args.Length == 0 && Console.CursorTop == 0)
       {
-        
         // Run a CMD session and initially print the help text to guide the user on how to start.
         Process.Start(new ProcessStartInfo("cmd.exe", "/k minitool help")
         {
